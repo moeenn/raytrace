@@ -1,6 +1,6 @@
 NAME=raytrace
 CC=cc
-STD=c23
+STD=c2x
 CFLAGS=-Wall -Wextra -pedantic -Werror -O3
 INC=-I./include
 LDDFLAGS=-lraylib -lm -lpthread -ldl
