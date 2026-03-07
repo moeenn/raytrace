@@ -3,21 +3,20 @@
 #include <stddef.h>
 #include <stdint.h>
 
-const char* WIN_TITLE = "Game";
-constexpr int WIN_HEIGHT = 600;
-constexpr int WIN_WIDTH = 800;
-constexpr int FPS = 60;
-constexpr int DEFAULT_SPEED = 8;
-constexpr int RADIUS = 20;
-constexpr Color BG = { 0, 0, 0, 1 };
-constexpr Color PARTICLE_COLOR = { 230, 41, 55, 255 };
-constexpr Color LINE_COLOR = { 180, 32, 44, 255 };
-constexpr size_t NUM_LINES = 100;
-constexpr int LINE_MAX_LENGTH = 800;
+#define WIN_TITLE "Game"
+#define WIN_HEIGHT 600
+#define WIN_WIDTH 800
+#define FPS 60
+#define RADIUS 10
+#define NUM_LINES 100
+#define LINE_MAX_LENGTH 1000
+
+static const Color BG = { 0, 0, 0, 1 };
+static const Color PARTICLE_COLOR = { 230, 41, 55, 255 };
+static const Color LINE_COLOR = { 180, 32, 44, 255 };
 
 typedef struct {
     Vector2 pos;
-    int speed;
 } Particle;
 
 typedef struct {
@@ -33,7 +32,6 @@ typedef struct {
 void particle_init(Particle* self, int x, int y)
 {
     self->pos = (Vector2) { .x = x, .y = y };
-    self->speed = DEFAULT_SPEED;
 }
 
 void particle_render(const Particle* p)
@@ -48,8 +46,6 @@ Vector2 calculateLineXAndY(int hypotenuse, float angle_degrees)
     float height = hypotenuse * sin(angle_rad);
     return (Vector2) { .x = base, .y = height };
 }
-
-typedef Line Lines[NUM_LINES];
 
 void lines_update(Line lines[], size_t numLines, Particle* p)
 {
@@ -83,7 +79,7 @@ void lines_render(Line lines[], size_t numLines)
 
 void square_render(Square* self)
 {
-    DrawRectangle(self->pos.x, self->pos.y, self->size, self->size, LINE_COLOR);
+    DrawRectangleLines(self->pos.x, self->pos.y, self->size, self->size, LINE_COLOR);
 }
 
 int main(void)
@@ -94,7 +90,7 @@ int main(void)
     Particle p;
     particle_init(&p, 200, 200);
 
-    Lines lines = {};
+    Line lines[NUM_LINES];
     Square squares[2] = {
         { .pos = { .x = 400, .y = 300 }, .size = 50 },
         { .pos = { .x = 100, .y = 100 }, .size = 100 },
