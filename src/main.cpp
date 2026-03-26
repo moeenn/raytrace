@@ -12,9 +12,9 @@ constexpr Color PARTICLE_COLOR = {230, 41, 55, 255};
 constexpr Color LINE_COLOR = {180, 32, 44, 255};
 constexpr int BOX_SIZE = 50;
 constexpr int RADIUS = 10;
-constexpr int NUM_LINES = 130;
+constexpr int NUM_LINES = 200;
 constexpr int LINE_MAX_LENGTH = 1300;
-constexpr int NUM_RECTANGLES = 10;
+constexpr int NUM_RECTANGLES = 5;
 
 struct Line
 {
